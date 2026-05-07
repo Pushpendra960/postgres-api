@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: sid
+      POSTGRES_PASSWORD: sidpass
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
